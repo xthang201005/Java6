@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <th:block th:replace="~{user/_meta}" />
+    <title>Thống kê doanh thu</title>
+  </head>
+
+  <body>
+    <th:block th:replace="~{admin/_headerAdmin}" />
+
+    <section class="section-content">
+      <div class="container">
+        <header class="section-heading py-4 d-flex justify-content-between">
+          <h3 class="section-title">Thống kê doanh thu theo loại hàng</h3>
+        </header>
+
+        <main class="table-responsive-xl mb-5">
+          <table
+            class="table table-bordered table-striped table-hover align-middle"
+          >
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Loại hàng</th>
+                <th>Tổng doanh thu</th>
+                <th>Tổng số lượng</th>
+                <th>Giá cao nhất</th>
+                <th>Giá thấp nhất</th>
+                <th>Giá trung bình</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="thongke, loop : ${thongKeList}">
+                <td th:text="${loop.index + 1}"></td>
+                <td th:text="${thongke[0]}"></td>
+                <!-- Tên loại hàng -->
+                <td
+                  th:text="${#numbers.formatDecimal(thongke[1], 0, 'COMMA', 0, 'POINT')}+ đ"
+                ></td>
+
+                <!-- Tổng doanh thu -->
+                <td th:text="${thongke[2]}"></td>
+                <!-- Tổng số lượng -->
+                <td
+                  th:text="${#numbers.formatDecimal(thongke[3], 0, 'COMMA', 0, 'POINT')}+ đ"
+                ></td>
+                <!-- Giá cao nhất -->
+                <td 
+                  th:text="${#numbers.formatDecimal(thongke[4], 0, 'COMMA', 0, 'POINT')}+ đ"
+                ></td>
+                <!-- Giá thấp nhất -->
+                <td
+                  th:text="${#numbers.formatDecimal(thongke[5], 0, 'COMMA', 0, 'POINT')}+ đ"
+                ></td>
+                <!-- Giá trung bình -->
+              </tr>
+            </tbody>
+          </table>
+        </main>
+      </div>
+    </section>
+
+    <th:block th:replace="~{admin/_footerAdmin}" />
+  </body>
+</html>
