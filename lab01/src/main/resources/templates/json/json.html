@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var sv = {
+        name: "Nguyen Van A",
+        age: 20,
+        address: "Ha Noi",
+        marks: 7.5,
+        contact: {
+          phone: "0123456789",
+          email: "kuem@gmail.com",
+        },
+        subjects: ["Math", "English", "Computer"],
+      };
+      //   <!-- XUAT DOI TUONG JSON -->
+      console.log(sv);
+      // truy xuat thuoc tinh
+      console.log(sv.name, sv.contact.email, sv.subjects[1]);
+      // duyet doi tuong theo key
+      for (var key in sv) {
+        console.log(key + " : " + sv[key]);
+      }
+      // chuyen doi tuong sang JSON.stringify sang chuoi
+      var json = JSON.stringify(sv);
+      console.log(json);
+
+      // chuyen chuoi JSON sang doi tuong   json.parse
+      var obj = JSON.parse(json);
+      console.log(obj);
+    </script>
+  </body>
+</html>

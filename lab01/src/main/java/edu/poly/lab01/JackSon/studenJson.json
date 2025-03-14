@@ -1,0 +1,11 @@
+{
+  "name": "Nguyen Van A",
+  "age": 20,
+  "address": "Ha Noi",
+  "marks": 7.5,
+  "contact": {
+    "phone": "0123456789",
+    "email": "kuem@gmail.com"
+  },
+  "subjects": ["Math", "English", "Computer"]
+}
