@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <th:block th:replace="~{user/_meta}" />
+    <title>Thống kê Top Khách Hàng VIP</title>
+  </head>
+
+  <body>
+    <th:block th:replace="~{admin/_headerAdmin}" />
+
+    <section class="section-content">
+      <div class="container">
+        <header class="section-heading py-4 d-flex justify-content-between">
+          <h3 class="section-title">Thống kê Top Khách Hàng VIP</h3>
+        </header>
+
+        <main class="table-responsive-xl mb-5">
+          <table
+            class="table table-bordered table-striped table-hover align-middle"
+          >
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tên khách hàng</th>
+                <th>Tổng tiền đã mua</th>
+                <th>Ngày mua đầu tiên</th>
+                <th>Ngày mua sau cùng</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="khachHang, loop : ${khachHangVipList}">
+                <td th:text="${loop.index + 1}"></td>
+                <td th:text="${khachHang.hoten}"></td>
+                <td
+                  th:text="${#numbers.formatDecimal(khachHang.tongTien, 0, 'COMMA', 0, 'POINT')}+ đ"
+                ></td>
+                <td
+                  th:text="${#dates.format(khachHang.ngayMuaDauTien, 'dd/MM/yyyy')}"
+                ></td>
+                <td
+                  th:text="${#dates.format(khachHang.ngayMuaGanNhat, 'dd/MM/yyyy')}"
+                ></td>
+              </tr>
+            </tbody>
+          </table>
+        </main>
+      </div>
+    </section>
+
+    <th:block th:replace="~{admin/_footerAdmin}" />
+  </body>
+</html>
