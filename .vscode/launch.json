@@ -1,0 +1,74 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "jsonMapp2",
+      "request": "launch",
+      "mainClass": "edu.poly.lab01.JackSon.jsonMapp2",
+      "projectName": "lab01"
+    },
+    {
+      "type": "java",
+      "name": "json1",
+      "request": "launch",
+      "mainClass": "edu.poly.lab01.JackSon.json1",
+      "projectName": "lab01"
+    },
+    {
+      "type": "java",
+      "name": "SteamAPI",
+      "request": "launch",
+      "mainClass": "edu.poly.lab01.streamAPI.SteamAPI",
+      "projectName": "lab01"
+    },
+    {
+      "type": "java",
+      "name": "lambda",
+      "request": "launch",
+      "mainClass": "edu.poly.lab01.lambda.lambda",
+      "projectName": "lab01"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Lab01Application<lab01>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "edu.poly.lab01.Lab01Application",
+      "projectName": "lab01",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=50892 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=lab01"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Java6Application<java6>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "edu.poly.java6.Java6Application",
+      "projectName": "java6",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=62314 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=java6"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-AssignmentJava5Application<assignment_java5>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "edu.poly.assignment_java5.AssignmentJava5Application",
+      "projectName": "assignment_java5",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-AssignmentJava6Application<assignment_java6>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "edu.poly.assignment_java6.AssignmentJava6Application",
+      "projectName": "assignment_java6",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
