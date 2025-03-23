@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Nguyen Van A",
+    "age": 20,
+    "address": "Ha Noi",
+    "marks": 7.5,
+    "contact": {
+      "phone": "0123456789",
+      "email": "nguyenvana@gmail.com"
+    },
+    "subjects": ["Math", "English", "Computer"]
+  },
+  {
+    "name": "Tran Thi B",
+    "age": 21,
+    "address": "Ho Chi Minh",
+    "marks": 8.0,
+    "contact": {
+      "phone": "0987654321",
+      "email": "tranthib@gmail.com"
+    },
+    "subjects": ["Physics", "Chemistry", "Biology"]
+  },
+  {
+    "name": "Le Van C",
+    "age": 22,
+    "address": "Da Nang",
+    "marks": 6.5,
+    "contact": {
+      "phone": "0912345678",
+      "email": "levanc@gmail.com"
+    },
+    "subjects": ["History", "Geography", "Literature"]
+  },
+  {
+    "name": "Pham Thi D",
+    "age": 19,
+    "address": "Hai Phong",
+    "marks": 9.0,
+    "contact": {
+      "phone": "0971122334",
+      "email": "phamthid@gmail.com"
+    },
+    "subjects": ["Math", "Physics", "Computer"]
+  },
+  {
+    "name": "Hoang Van E",
+    "age": 23,
+    "address": "Can Tho",
+    "marks": 7.8,
+    "contact": {
+      "phone": "0965566778",
+      "email": "hoangvane@gmail.com"
+    },
+    "subjects": ["English", "Computer", "Art"]
+  }
+]
