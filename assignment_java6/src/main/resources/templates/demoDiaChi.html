@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm Địa Chỉ Khách Hàng</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2 class="mb-4">Thêm Địa Chỉ Khách Hàng</h2>
+      <form id="addressForm">
+        <div class="mb-3">
+          <label for="idUser" class="form-label">ID User</label>
+          <input
+            type="text"
+            class="form-control"
+            id="idUser"
+            name="idUser"
+            placeholder="Nhập ID người dùng"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="city" class="form-label">Chọn Thành Phố</label>
+          <select
+            id="city"
+            class="form-select"
+            onchange="loadDistricts()"
+            required
+          >
+            <option value="">Chọn thành phố</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="district" class="form-label">Chọn Quận/Huyện</label>
+          <select
+            id="district"
+            class="form-select"
+            onchange="loadWards()"
+            required
+          >
+            <option value="">Chọn quận/huyện</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="ward" class="form-label">Chọn Phường/Xã</label>
+          <select id="ward" class="form-select" required>
+            <option value="">Chọn phường/xã</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="diaChiCuThe" class="form-label">Địa Chỉ Cụ Thể</label>
+          <textarea
+            class="form-control"
+            id="diaChiCuThe"
+            name="diaChiCuThe"
+            rows="3"
+            placeholder="Nhập địa chỉ cụ thể"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Thêm Địa Chỉ</button>
+      </form>
+    </div>
+
+    <script>
+      async function loadCities() {
+        let response = await fetch("https://provinces.open-api.vn/api/");
+        let cities = await response.json();
+
+        let citySelect = document.getElementById("city");
+        cities.forEach((city) => {
+          let option = document.createElement("option");
+          option.value = city.code;
+          option.textContent = city.name;
+          citySelect.appendChild(option);
+        });
+      }
+
+      async function loadDistricts() {
+        let citySelect = document.getElementById("city");
+        let districtSelect = document.getElementById("district");
+        districtSelect.innerHTML = "<option value=''>Chọn quận/huyện</option>";
+
+        let wardSelect = document.getElementById("ward");
+        wardSelect.innerHTML = "<option value=''>Chọn phường/xã</option>";
+
+        let selectedCityCode = citySelect.value;
+        if (!selectedCityCode) return;
+
+        let response = await fetch(
+          `https://provinces.open-api.vn/api/p/${selectedCityCode}?depth=2`
+        );
+        let cityData = await response.json();
+
+        cityData.districts.forEach((district) => {
+          let option = document.createElement("option");
+          option.value = district.code;
+          option.textContent = district.name;
+          districtSelect.appendChild(option);
+        });
+      }
+
+      async function loadWards() {
+        let districtSelect = document.getElementById("district");
+        let wardSelect = document.getElementById("ward");
+        wardSelect.innerHTML = "<option value=''>Chọn phường/xã</option>";
+
+        let selectedDistrictCode = districtSelect.value;
+        if (!selectedDistrictCode) return;
+
+        let response = await fetch(
+          `https://provinces.open-api.vn/api/d/${selectedDistrictCode}?depth=2`
+        );
+        let districtData = await response.json();
+
+        districtData.wards.forEach((ward) => {
+          let option = document.createElement("option");
+          option.value = ward.code;
+          option.textContent = ward.name;
+          wardSelect.appendChild(option);
+        });
+      }
+
+      document
+        .getElementById("addressForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault(); // Ngăn form reload trang
+
+          let formData = {
+            idUser: document.getElementById("idUser").value,
+            thanhPho:
+              document.getElementById("city").options[
+                document.getElementById("city").selectedIndex
+              ].text,
+            quanHuyen:
+              document.getElementById("district").options[
+                document.getElementById("district").selectedIndex
+              ].text,
+            phuongXa:
+              document.getElementById("ward").options[
+                document.getElementById("ward").selectedIndex
+              ].text,
+            diaChiCuThe: document.getElementById("diaChiCuThe").value,
+          };
+
+          let response = await fetch("/api/diachi/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+
+          if (response.ok) {
+            alert("Thêm địa chỉ thành công!");
+            document.getElementById("addressForm").reset();
+          } else {
+            alert("Có lỗi xảy ra khi thêm địa chỉ.");
+          }
+        });
+
+      window.onload = loadCities;
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
