@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import edu.poly.assignment_java6.model.Loai;
 import edu.poly.assignment_java6.model.Users;
@@ -24,10 +25,17 @@ public class LoaiController {
 	private HttpSession session;
 
 	@GetMapping("/admin/loai")
-	public String loaiManager(Model model, @RequestParam(defaultValue = "0", name = "page") int page) {
+	public String loaiManager(Model model, @RequestParam(defaultValue = "0", name = "page") int page, RedirectAttributes redirectAttributes
+	,HttpServletRequest request
+	) {
 		Users currentUser = (Users) session.getAttribute("currentUser");
-		if (currentUser == null || !currentUser.isVaitro()) {
-			return "redirect:/";
+		if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) ) {
+			redirectAttributes.addFlashAttribute("errorMessage", "Bạn không có quyền truy cập vào trang này.");
+				
+			// Lấy trang trước đó từ Header Referer
+			String referer = request.getHeader("Referer");
+			return "redirect:" + (referer != null ? referer : "/admin/loai"); // Nếu không lấy được referer, mặc định về /admin/loai
+			
 		}
 
 		Page<Loai> loaiPage = loaiService.getAllLoai(page, 8);
@@ -41,7 +49,7 @@ public class LoaiController {
 	@GetMapping("/admin/loai/create")
 	public String userCreate(Model model, @ModelAttribute("loai") Loai loai) {
 		Users currentUser = (Users) session.getAttribute("currentUser");
-		if (currentUser == null || !currentUser.isVaitro()) {
+		if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) ) {
 			return "redirect:/";
 		}
 		return "admin/loai/createLoai";
@@ -51,7 +59,7 @@ public class LoaiController {
 	public String userInsert(Model model, @ModelAttribute("loai") Loai loai) {
 		try {
 			Users currentUser = (Users) session.getAttribute("currentUser");
-			if (currentUser == null || !currentUser.isVaitro()) {
+			if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) ) {
 				return "redirect:/";
 			}
 			loaiService.create(loai);
@@ -65,7 +73,7 @@ public class LoaiController {
 	@GetMapping("/admin/loai/edit/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		Users currentUser = (Users) session.getAttribute("currentUser");
-		if (currentUser == null || !currentUser.isVaitro()) {
+		if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) ) {
 			return "redirect:/";
 		}
 		try {
@@ -81,7 +89,7 @@ public class LoaiController {
 	public String updateUser(Model model, @PathVariable("id") Integer id, @ModelAttribute("loai") Loai updatedLoai) {
 		try {
 			Users currentUser = (Users) session.getAttribute("currentUser");
-			if (currentUser == null || !currentUser.isVaitro()) {
+			if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) ) {
 				return "redirect:/";
 			}
 			loaiService.updateUser(id, updatedLoai);

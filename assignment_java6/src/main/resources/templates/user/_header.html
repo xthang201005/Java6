@@ -35,12 +35,23 @@
             <ul
               class="nav col-12 col-lg-auto my-2 my-lg-0 justify-content-center justify-content-lg-end text-small"
             >
-              <li th:if="${session.currentUser.vaitro}">
-                <a th:href="@{/admin/user}" class="nav-link text-body">
+              <li th:if="${session.currentUser.vaitro == 1 or session.currentUser.vaitro == 2}">
+                <a th:href="@{/admin/loai}" class="nav-link text-body">
                   <i class="bi bi-gear d-block text-center fs-3"></i>
                   Admin
+
                 </a>
               </li>
+
+          <li th:if="${session.currentUser != null and (session.currentUser.vaitro == 3)}">
+            <a th:href="@{/admin/hoadon}" class="nav-link text-body">
+              <i class="bi bi-truck d-block text-center fs-3"></i> 
+              Shipper
+              
+            </a>
+        </li>
+          
+
               <li>
                 <a th:href="@{/setting}" class="nav-link text-body">
                   <i class="bi bi-person d-block text-center fs-3"></i>
