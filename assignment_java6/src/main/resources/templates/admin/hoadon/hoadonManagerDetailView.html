@@ -12,6 +12,14 @@
 
 <section class="section-content">
   <div class="container">
+    <!-- Hiển thị thông báo thành công -->
+    <div th:if="${successMessage}" class="alert alert-success mb-0 mt-4" role="alert">
+      <span th:text="${successMessage}"></span>
+    </div>
+
+    <div th:if="${errorMessage}" class="alert alert-danger mb-0 mt-4" role="alert">
+      <span th:text="${errorMessage}"></span>
+    </div>
     <header class="section-heading py-4">
       <h3 class="section-title">Thông tin đơn hàng</h3>
     </header> <!-- section-heading.// -->

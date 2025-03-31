@@ -90,7 +90,12 @@ public class UserService {
 		if (existingUserByPhone.isPresent()) {
 			throw new IllegalArgumentException("Số điện thoại đã được sử dụng!");
 		}
-		user.setVaitro(false);
+
+		// Đảm bảo quyền (vaitro) không bị null
+		if (user.getVaitro() == null) {
+			user.setVaitro(0); // Mặc định là khách hàng nếu không chọn
+		}
+
 		usersRepository.save(user);
 
 		GioHang gioHang = new GioHang();
@@ -107,7 +112,7 @@ public class UserService {
 			user.setHoten(updatedUser.getHoten());
 			user.setSdt(updatedUser.getSdt());
 			user.setHinh(updatedUser.getHinh());
-			user.setVaitro(updatedUser.isVaitro());
+			user.setVaitro(updatedUser.getVaitro());
 
 			return usersRepository.save(user);
 		} else {
