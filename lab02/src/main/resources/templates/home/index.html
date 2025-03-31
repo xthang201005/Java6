@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <img th:src="@{/images/spring-boot.png}" alt="Spring Boot" /> -->
+    <nav th:replace="~{/layout/menu.html}"></nav>
+    <h1 th:text="${message}"></h1>
+
+    <ul th:each="students : ${students}" th:object="${students}">
+      <li th:text="*{name}"></li>
+      <li th:text="*{marks}"></li>
+    </ul>
+    ---------------------
+    <ul>
+      <li th:each="students : ${students}">
+        <span th:text="${students.name}"></span> -
+        <span th:text="${students.marks}"></span>
+      </li>
+    </ul>
+  </body>
+</html>

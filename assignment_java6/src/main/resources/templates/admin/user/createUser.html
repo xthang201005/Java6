@@ -47,8 +47,11 @@
           <label for="vaitro" class="form-label">Quyền <span class="text-danger">*</span></label>
           <select class="form-select" name="vaitro" id="vaitro"  required>
             <option value="" disabled selected>Chọn một quyền...</option>
-            <option value="true" th:selected="${user.vaitro}">Quản trị viên</option>
-            <option value="false" th:selected="${!user.vaitro}">Khách hàng</option>
+            <option value="1" th:selected="${user.vaitro == 1}">Quản trị viên</option>
+            <option value="2" th:selected="${user.vaitro == 2}">Nhân viên</option>
+            <option value="0" th:selected="${user.vaitro == 0}">Khách hàng</option>
+            <option value="3" th:selected="${user.vaitro == 3}">NV Giao hàng </option>
+
           </select>
         </div>
         

@@ -30,7 +30,7 @@ public class Users {
     private String matkhau;
 
     @Column(name = "vaitro", nullable = false)
-    private boolean vaitro;
+    private Integer  vaitro;
 
 	
 

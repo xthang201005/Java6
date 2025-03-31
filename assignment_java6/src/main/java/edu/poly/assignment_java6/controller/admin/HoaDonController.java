@@ -33,7 +33,9 @@ public class HoaDonController {
 	@GetMapping("/admin/hoadon")
 	public String hoadonManager(Model model, @RequestParam(defaultValue = "0", name = "page") int page) {
 		Users currentUser = (Users) session.getAttribute("currentUser");
-		if (currentUser == null || !currentUser.isVaitro()) {
+
+		if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2 && currentUser.getVaitro() != 3)) {
+
 			return "redirect:/";
 		}
 
@@ -48,7 +50,7 @@ public class HoaDonController {
 	@GetMapping("/admin/hoadon/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		Users currentUser = (Users) session.getAttribute("currentUser");
-		if (currentUser == null || !currentUser.isVaitro()) {
+		if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2 && currentUser.getVaitro() != 3)) {
 			return "redirect:/";
 		}
 		try {
@@ -79,10 +81,10 @@ public class HoaDonController {
 			@RequestParam("action") String action) {
 		try {
 			Users currentUser = (Users) session.getAttribute("currentUser");
-			if (currentUser == null || !currentUser.isVaitro()) {
+
+			if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2 && currentUser.getVaitro() != 3)) {
 				return "redirect:/";
 			}
-
 			redirectAttributes.addFlashAttribute("successMessage", hoaDonService.updateHoadon(id, action));
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());

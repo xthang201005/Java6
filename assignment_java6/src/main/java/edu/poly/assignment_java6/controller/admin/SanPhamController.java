@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import edu.poly.assignment_java6.model.KhachHangVipDTO;
 import edu.poly.assignment_java6.model.SanPham;
@@ -39,7 +40,7 @@ public class SanPhamController {
 	@GetMapping("/admin/sanpham")
 	public String sanPhamManager(Model model, @RequestParam(defaultValue = "0", name = "page") int page) {
 		Users currentUser = (Users) session.getAttribute("currentUser");
-		if (currentUser == null || !currentUser.isVaitro()) {
+		if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) && currentUser.getVaitro() != 3) {
 			return "redirect:/";
 		}
 
@@ -54,7 +55,7 @@ public class SanPhamController {
 	@GetMapping("/admin/sanpham/create")
 	public String userCreate(Model model, @ModelAttribute("sanpham") SanPham sanPham) {
 		Users currentUser = (Users) session.getAttribute("currentUser");
-		if (currentUser == null || !currentUser.isVaitro()) {
+		if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) && currentUser.getVaitro() != 3) {
 			return "redirect:/";
 		}
 		model.addAttribute("loais", loaiService.getAllLoai(0, 100));
@@ -66,7 +67,7 @@ public class SanPhamController {
 			@RequestParam("image") MultipartFile image) {
 		try {
 			Users currentUser = (Users) session.getAttribute("currentUser");
-			if (currentUser == null || !currentUser.isVaitro()) {
+			if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) && currentUser.getVaitro() != 3) {
 				return "redirect:/";
 			}
 			sanPhamService.create(sanPham, image);
@@ -81,7 +82,7 @@ public class SanPhamController {
 	@GetMapping("/admin/sanpham/edit/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		Users currentUser = (Users) session.getAttribute("currentUser");
-		if (currentUser == null || !currentUser.isVaitro()) {
+		if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) && currentUser.getVaitro() != 3) {
 			return "redirect:/";
 		}
 		try {
@@ -101,7 +102,7 @@ public class SanPhamController {
 			@RequestParam(name = "image", required = false) MultipartFile image) {
 		try {
 			Users currentUser = (Users) session.getAttribute("currentUser");
-			if (currentUser == null || !currentUser.isVaitro()) {
+			if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) && currentUser.getVaitro() != 3) {
 				return "redirect:/";
 			}
 			model.addAttribute("sanpham", sanPhamService.updateSanPham(id, updatedSanPham, image));
@@ -132,13 +133,29 @@ public class SanPhamController {
 
 	}
 	@GetMapping("/admin/thongke-view")
-public String viewThongKe(Model model) {
+public String viewThongKe(Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+	Users currentUser = (Users) session.getAttribute("currentUser");
+	if (currentUser == null || currentUser.getVaitro() != 1) {
+		redirectAttributes.addFlashAttribute("errorMessage", "Bạn không có quyền truy cập vào trang này.");
+		
+		// Lấy trang trước đó từ Header Referer
+		String referer = request.getHeader("Referer");
+		return "redirect:" + (referer != null ? referer : "/admin/loai"); // Nếu không lấy được referer, mặc định về /admin/loai
+	}
     model.addAttribute("thongKeList", sanPhamService.getThongKeDoanhThuTheoLoai());
     return "admin/thongke/thongke";
 }
 ///admin/khachhang-vip
 @GetMapping("/admin/khachhang-vip")
-public String viewTop10KhachHangVip(Model model) {
+public String viewTop10KhachHangVip(Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+	Users currentUser = (Users) session.getAttribute("currentUser");
+	if (currentUser == null || currentUser.getVaitro() != 1) {
+		redirectAttributes.addFlashAttribute("errorMessage", "Bạn không có quyền truy cập vào trang này.");
+		
+		// Lấy trang trước đó từ Header Referer
+		String referer = request.getHeader("Referer");
+		return "redirect:" + (referer != null ? referer : "/admin/loai"); // Nếu không lấy được referer, mặc định về /admin/loai
+	}
     // Lấy danh sách top 10 khách hàng VIP từ service
     List<KhachHangVipDTO> khachHangVipList = hoaDonService.getTop10KhachHangVip();
 

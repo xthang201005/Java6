@@ -48,7 +48,12 @@
               <td th:text="${user.idUser}"></td>
               <td th:text="${user.hoten}"></td>
               <td th:text="${user.sdt}"></td>
-              <td th:text="${user.vaitro} ? 'Admin' : 'Khách hàng'"></td>
+              <td th:text="${user.vaitro == 1} ? 'Admin' 
+                  : (${user.vaitro == 2} ? 'Nhân viên' 
+                  : (${user.vaitro == 3} ? 'Nhân viên giao hàng' 
+                  : 'Khách hàng'))">
+              </td>
+
               <td class="text-center text-nowrap">
                 <a class="btn btn-success me-2"
                    th:href="@{/admin/user/edit/{id}(id=${user.idUser})}"
