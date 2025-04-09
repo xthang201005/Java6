@@ -195,40 +195,69 @@ async function _fetchUpdateCartItem(cartItemId, quantity, productId) {
   return [response.status, await response.json()]; // trả về status và dữ liệu json
 }
 
-async function _fetchPostAddOrder() { // thêm đơn hàng
-  // thêm đơn hàng
-  const address = document.querySelector("#diachi"); // lấy thông tin địa chỉ giao hàng
-  if (address.value.length === 0) {
-    createToast(toastComponent("Vui lòng nhập số địa chỉ giao hàng", "danger"));
+async function _fetchPostAddOrder() {
+  // Lấy thông tin địa chỉ
+  const provinceSelect = document.getElementById('tinhthanh');
+  const districtSelect = document.getElementById('quanhuyen');
+  const addressDetail = document.getElementById('diachi');
+  const wardSelect = document.getElementById('phuongxa'); // Lấy danh sách phường/xã
+  
+  // Validate địa chỉ
+  if (!provinceSelect.value || !districtSelect.value || !wardSelect.value || !addressDetail.value.trim()) {
+    createToast(toastComponent("Vui lòng nhập đầy đủ thông tin địa chỉ", "danger"));
     return;
   }
+  
+  // Lấy tên địa phương (bỏ chữ "Tỉnh", "Thành phố", "Quận", "Huyện", "Phường", "Xã" nếu có)
+  const provinceName = provinceSelect.options[provinceSelect.selectedIndex].text
+    .replace(/Tỉnh |Thành phố /gi, '');
+  const districtName = districtSelect.options[districtSelect.selectedIndex].text
+    .replace(/Quận |Huyện /gi, '');
+  const wardName = wardSelect.options[wardSelect.selectedIndex].text
+    .replace(/Phường |Xã /gi, '');
+
+  
+  // Định dạng địa chỉ theo yêu cầu: "Tỉnh/TP, Quận/Huyện, Phường/Xã, Địa chỉ chi tiết"
+  const formattedAddress = `${provinceName}, ${districtName}, ${wardName}, ${addressDetail.value.trim()}`;
+
+  // Giữ nguyên logic lấy thông tin sản phẩm
   const orderItems = state.cart.cartItems.map((cartItem) => ({
-    // lấy thông tin sản phẩm trong giỏ hàng
-    productId: cartItem.productId, // id sản phẩm
-    price: cartItem.productPrice, // giá sản phẩm
-    discount: cartItem.productDiscount, // giảm giá
-    quantity: cartItem.quantity, // số lượng sản phẩm
+    productId: cartItem.productId,
+    price: cartItem.productPrice,
+    discount: cartItem.productDiscount,
+    quantity: cartItem.quantity,
   }));
+
+  // Tạo orderRequest với địa chỉ đã định dạng
   const orderRequest = {
-    // gửi request POST để thêm đơn hàng
-    cartId: state.cart.cartItems[0].cartId, // id giỏ hàng
-    address: address.value, //  địa chỉ giao hàng
-    userId: currentUserIdMetaTag.content, //  id người dùng
-    deliveryMethod: state.order.deliveryMethod, // phương thức giao hàng
-    deliveryPrice: state.order.deliveryPrice, // giá giao hàng
-    orderItems: orderItems, // sản phẩm trong giỏ hàng
+    cartId: state.cart.cartItems[0].cartId,
+    address: formattedAddress, // Địa chỉ đã được định dạng
+    // Thêm các trường địa chỉ chi tiết nếu cần
+    province: provinceSelect.value,
+    provinceName: provinceName,
+    district: districtSelect.value,
+    districtName: districtName,
+    ward: wardSelect.value,
+    wardName: wardName,
+    addressDetail: addressDetail.value.trim(),
+    // Giữ nguyên các trường khác
+    userId: currentUserIdMetaTag.content,
+    deliveryMethod: state.order.deliveryMethod,
+    deliveryPrice: state.order.deliveryPrice,
+    orderItems: orderItems,
   };
+
+  // Giữ nguyên phần gửi request
   const response = await fetch("/cart", {
-    //  gửi request POST để thêm đơn hàng
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(orderRequest), // chuyển dữ liệu thành dạng json
+    body: JSON.stringify(orderRequest),
   });
 
-  return [response.status, await response.json()]; // trả về status và dữ liệu json
+  return [response.status, await response.json()];
 }
 
 function _formatPrice(price) {
@@ -451,4 +480,117 @@ if (currentUserIdMetaTag) {
   // kiểm tra người dùng đã đăng nhập chưa
   cartTableRootElement.innerHTML = loadingComponent(); // hiển thị thông báo đang tải chờ
   void state.initState(); // khởi tạo state
+}
+
+
+// API endpoint (Vietnam Administrative Boundaries)
+const API_BASE = "https://provinces.open-api.vn/api/";
+
+// 1. Load danh sách Tỉnh/Thành phố khi trang tải
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch(API_BASE + 'p/');
+        const provinces = await response.json();
+        const provinceSelect = document.getElementById('tinhthanh');
+
+        provinces.forEach(province => {
+            const option = document.createElement('option');
+            option.value = province.code;
+            option.textContent = province.name;
+            provinceSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error("Lỗi khi lấy danh sách tỉnh/thành phố:", error);
+        showToast('error', 'Không thể tải danh sách tỉnh/thành phố');
+    }
+});
+
+// 2. Load Quận/Huyện khi chọn Tỉnh
+async function loadQuanHuyen() {
+    const provinceCode = document.getElementById('tinhthanh').value;
+    const districtSelect = document.getElementById('quanhuyen');
+    
+    // Reset dropdown
+    districtSelect.innerHTML = '<option value="">-- Chọn Quận/Huyện --</option>';
+    districtSelect.disabled = !provinceCode;
+    
+    if (!provinceCode) {
+        updateAddressPreview();
+        return;
+    }
+
+    try {
+        showLoading();
+        const response = await fetch(`${API_BASE}p/${provinceCode}?depth=2`);
+        const provinceData = await response.json();
+        
+        provinceData.districts.forEach(district => {
+            const option = document.createElement('option');
+            option.value = district.code;
+            option.textContent = district.name;
+            districtSelect.appendChild(option);
+        });
+        updateAddressPreview();
+    } catch (error) {
+        console.error("Lỗi khi lấy danh sách quận/huyện:", error);
+        showToast('error', 'Không thể tải danh sách quận/huyện');
+    } finally {
+        hideLoading();
+    }
+}
+
+// 3. Load Phường/Xã  khi chọn Tỉnh
+async function loadPhuongXa() {
+  const districtCode = document.getElementById('quanhuyen').value;
+  const wardSelect = document.getElementById('phuongxa');
+
+  // Reset danh sách Phường/Xã
+  wardSelect.innerHTML = '<option value="">-- Chọn Phường/Xã --</option>';
+  wardSelect.disabled = !districtCode;
+
+  if (!districtCode) return;
+
+  try {
+      showLoading();
+      const response = await fetch(`${API_BASE}d/${districtCode}?depth=2`);
+      const districtData = await response.json();
+
+      districtData.wards.forEach(ward => {
+          const option = document.createElement('option');
+          option.value = ward.code;
+          option.textContent = ward.name;
+          wardSelect.appendChild(option);
+      });
+
+      wardSelect.disabled = false; // Mở khóa select Phường/Xã sau khi load xong
+  } catch (error) {
+      console.error("Lỗi khi lấy danh sách phường/xã:", error);
+      showToast('error', 'Không thể tải danh sách phường/xã');
+  } finally {
+      hideLoading();
+  }
+}
+
+
+
+
+// Gắn sự kiện
+document.getElementById('tinhthanh').addEventListener('change', loadQuanHuyen);
+
+document.getElementById('quanhuyen').addEventListener('change', loadPhuongXa);
+
+document.getElementById('quanhuyen').addEventListener('change', updateAddressPreview);
+document.getElementById('diachi').addEventListener('input', updateAddressPreview);
+
+// Helper functions
+function showLoading() {
+    // Hiển thị loading nếu cần
+}
+
+function hideLoading() {
+    // Ẩn loading
+}
+
+function showToast(type, message) {
+    // Hiển thị thông báo
 }

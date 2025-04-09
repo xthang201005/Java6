@@ -164,3 +164,9 @@ img.img-fluid {
   height: 100%;
   object-fit: cover; /* Đảm bảo ảnh không bị méo khi co giãn */
 }
+
+
+/* gio hang */
+.tp{
+  width: 300px;
+}

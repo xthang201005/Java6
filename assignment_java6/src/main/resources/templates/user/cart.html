@@ -21,7 +21,7 @@
 
 <section class="section-pagetop bg-light">
   <div class="container">
-    <h2 class="title-page">Giỏ hàng</h2>
+    <h2 class="title-page">Giỏ hàng của bạn </h2>
   </div> <!-- container.// -->
 </section> <!-- section-pagetop.// -->
 
@@ -37,8 +37,37 @@
        <th:block th:if="${session.currentUser != null}">
          <main class="col-lg-9 mb-lg-0 mb-3">
          	<div class="mb-3 col-lg-5 col-12">
-				<label for="diachi">Địa chỉ:</label>
-				<textarea rows="2" id="diachi" class="form-control"></textarea>
+				<label for="diachi">  <b style="font-size: 30px;"> Địa chỉ giao hàng :</b></label>
+				<div class="mt-4 col-lg-5 col-12">
+          
+             
+                  <label for="tinhthanh">Tỉnh/Thành phố:</label>
+                  <select id="tinhthanh" class="form-control tp" required>
+                      <option value="">-- Chọn Tỉnh/TP --</option>
+                      <!-- Dữ liệu sẽ được load bằng JavaScript -->
+                  </select>
+                  <br>
+              
+            
+                  <label for="quanhuyen">Quận/Huyện:</label>
+                  <select id="quanhuyen" class="form-control tp" required disabled>
+                      <option value="">-- Chọn Quận/Huyện --</option>
+                  </select>
+                  <br>
+                  <label for="phuongxa">Phường/Xã:</label>
+                  <select id="phuongxa" class="form-control tp" required disabled>
+                      <option value="">-- Chọn Phường/Xã --</option>
+                  </select>
+                  <br>
+              
+          
+          <div class="mb-3">
+              <label for="diachi">Địa chỉ chi tiết:</label>
+              <input type="text" id="diachi" class="form-control tp" 
+                     placeholder="Số nhà, tên đường, phường/xã..." required>
+          </div>
+         
+      </div>
          	</div>
            <div class="card">
              <div id="cart-table"></div>
