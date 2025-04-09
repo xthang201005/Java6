@@ -12,6 +12,7 @@
     <section class="section-content">
       <div class="container">
         <!-- Hiển thị thông báo thành công -->
+
         <div
           th:if="${successMessage}"
           class="alert alert-success mb-0 mt-4"
@@ -51,7 +52,7 @@
                 <th>Số lượng tồn</th>
                 <th>Giá bán</th>
                 <th>Giảm giá(%)</th>
-                <th>Hình</th>
+                <!-- <th>Hình</th> -->
                 <th>Loại</th>
                 <th>Ngày tạo</th>
                 <th scope="col" style="width: 225px">Thao tác</th>
@@ -68,7 +69,7 @@
                 <td
                   th:text="${sanpham.giamgia != null ?sanpham.giamgia+'%':'Không có'}"
                 ></td>
-                <td class="text-center">
+                <!-- <td class="text-center">
                   <img
                     style="object-fit: cover"
                     width="200"
@@ -76,7 +77,7 @@
                     th:src="@{/image/{url}(url=${sanpham.hinh})}"
                     alt="${sanpham.tenSanpham}"
                   />
-                </td>
+                </td> -->
                 <td th:text="${sanpham.loai.tenLoai}"></td>
                 <td
                   th:text="${#dates.format(sanpham.ngaytao, 'dd/MM/yyyy')}"

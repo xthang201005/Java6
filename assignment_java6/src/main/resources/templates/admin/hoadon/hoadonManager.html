@@ -24,6 +24,7 @@
         <thead>
         <tr>
           <th scope="col" style="min-width: 125px;">Mã đơn hàng</th>
+          <th scope="col" style="min-width: 125px;">Người đặt</th>
           <th scope="col" style="min-width: 100px;">Ngày mua</th>
           <th scope="col" style="min-width: 100px;">Giao hàng</th>
           <th scope="col" style="min-width: 175px;">Trạng thái đơn hàng</th>
@@ -34,6 +35,7 @@
          <th:block th:each="order:${hoadons}">
           <tr>
             <th scope="row" th:text="${order.idHoadon}"></th>
+            <td th:text="${order.users.hoten}"></td>
             <td th:text="${#dates.format(order.ngaytao, 'dd/MM/yyyy')}"></td>
             <td th:text="${order.giaohang == 'Giao hàng nhanh'?'Giao hàng nhanh (+50.000₫)':'Giao hàng tiêu chuẩn (+20.000₫)'}"></td>
             <td>

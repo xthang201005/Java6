@@ -1,6 +1,10 @@
 import createToast, { toastComponent } from "./toast.js"; // import toast
 import { setTotalCartItemsQuantity } from "./header.js"; // import setTotalCartItemsQuantity
 
+function toggleAddressForm() {
+  const form = document.getElementById("addressForm");
+  form.style.display = (form.style.display === "none") ? "block" : "none";
+}
 // STATIC DATA
 const currentUserIdMetaTag = document.querySelector(
   "meta[name='currentUserId']"

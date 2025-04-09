@@ -44,7 +44,7 @@ public class SanPhamController {
 			return "redirect:/";
 		}
 
-		Page<SanPham> sanPhamPage = sanPhamService.getAllSanPham(page, 5);
+		Page<SanPham> sanPhamPage = sanPhamService.getAllSanPham(page, 8);
 
 		model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
 		model.addAttribute("currentPage", page); // Trang hiện tại
@@ -63,21 +63,31 @@ public class SanPhamController {
 	}
 
 	@PostMapping("/admin/sanpham/create")
-	public String sanphamInsert(Model model, @ModelAttribute("sanpham") SanPham sanPham,
-			@RequestParam("image") MultipartFile image) {
+	public String sanphamInsert(@ModelAttribute("sanpham") SanPham sanPham,
+								@RequestParam("image") MultipartFile image,
+								RedirectAttributes redirectAttributes) {
 		try {
 			Users currentUser = (Users) session.getAttribute("currentUser");
 			if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) && currentUser.getVaitro() != 3) {
 				return "redirect:/";
 			}
+	
 			sanPhamService.create(sanPham, image);
-			model.addAttribute("successMessage", "Tạo sản phẩm thành công");
+	
+			
+			redirectAttributes.addFlashAttribute("successMessage", "Tạo sản phẩm thành công!");
+	
+			
+			return "redirect:/admin/sanpham";
+	
 		} catch (Exception e) {
-			model.addAttribute("errorMessage", e.getMessage());
+		
+			redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+			redirectAttributes.addFlashAttribute("sanpham", sanPham); // giữ lại dữ liệu
+			return "redirect:/admin/sanpham/create";
 		}
-		model.addAttribute("loais", loaiService.getAllLoai(0, 100));
-		return "admin/sanpham/createSanPham";
 	}
+	
 
 	@GetMapping("/admin/sanpham/edit/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {

@@ -78,24 +78,27 @@ public class AdminController {
 	}
 
 	@PostMapping("/admin/user/create")
-	public String userInsert(Model model, @ModelAttribute("user") Users user,@RequestParam("vaitro") int vaitro, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+	public String userInsert(Model model, @ModelAttribute("user") Users user, @RequestParam("vaitro") int vaitro,
+							 RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		try {
 			Users currentUser = (Users) session.getAttribute("currentUser");
 			if (currentUser == null || currentUser.getVaitro() != 1) {
 				redirectAttributes.addFlashAttribute("errorMessage", "Bạn không có quyền truy cập vào trang này.");
-				
-				// Lấy trang trước đó từ Header Referer
 				String referer = request.getHeader("Referer");
-				return "redirect:" + (referer != null ? referer : "/admin/loai"); // Nếu không lấy được referer, mặc định về /admin/loai
+				return "redirect:" + (referer != null ? referer : "/admin/loai");
 			}
+	
 			user.setVaitro(vaitro);
 			userService.register(user);
-			model.addAttribute("successMessage", "Tạo tài khoản thành công");
+			redirectAttributes.addFlashAttribute("successMessage", "Tạo tài khoản thành công");
+			return "redirect:/admin/user"; 
+	
 		} catch (Exception e) {
 			model.addAttribute("errorMessage", e.getMessage());
+			return "admin/user/createUser"; 
 		}
-		return "admin/user/createUser";
 	}
+	
 
 	@GetMapping("/admin/user/edit/{id}")
 	public String showUpdateForm(@PathVariable("id") String id, Model model , RedirectAttributes redirectAttributes, HttpServletRequest request) {

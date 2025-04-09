@@ -56,19 +56,27 @@ public class LoaiController {
 	}
 
 	@PostMapping("/admin/loai/create")
-	public String userInsert(Model model, @ModelAttribute("loai") Loai loai) {
+	public String userInsert(@ModelAttribute("loai") Loai loai,
+							 RedirectAttributes redirectAttributes,
+							 Model model) {
 		try {
 			Users currentUser = (Users) session.getAttribute("currentUser");
-			if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2) ) {
+			if (currentUser == null || (currentUser.getVaitro() != 1 && currentUser.getVaitro() != 2)) {
 				return "redirect:/";
 			}
+	
 			loaiService.create(loai);
-			model.addAttribute("successMessage", "Tạo loại hàng thành công");
+			redirectAttributes.addFlashAttribute("successMessage", "Tạo loại hàng thành công");
+	
+		
+			return "redirect:/admin/loai";
+	
 		} catch (Exception e) {
 			model.addAttribute("errorMessage", e.getMessage());
+			return "admin/loai/createLoai";
 		}
-		return "admin/loai/createLoai";
 	}
+	
 
 	@GetMapping("/admin/loai/edit/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {

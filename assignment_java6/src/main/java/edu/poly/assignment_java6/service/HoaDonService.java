@@ -115,7 +115,7 @@ public class HoaDonService {
 // Trả về: Một chuỗi thông báo kết quả của hành động.
 	public String updateHoadon(Integer id, String action) throws IllegalArgumentException {
 		HoaDon hoaDon = getHoaDonById(id);
-		if ("CONFIRM".equals(action)) {
+		if ("CONFIRM".equals(action)) {	
 			hoaDon.setTrangthai("received");
 			hoaDonRepository.save(hoaDon);
 			return "Đã xác nhận đã giao đơn hàng #" + id + " thành công!";

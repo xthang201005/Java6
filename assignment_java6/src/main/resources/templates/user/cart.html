@@ -37,14 +37,22 @@
        <th:block th:if="${session.currentUser != null}">
          <main class="col-lg-9 mb-lg-0 mb-3">
          	<div class="mb-3 col-lg-5 col-12">
-				<label for="diachi">  <b style="font-size: 30px;"> Địa chỉ giao hàng :</b></label>
+       <!-- Nút Thêm Địa Chỉ -->
+       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#diaChiModal">
+        + Thêm địa chỉ
+      </button>
+      
+     
+
+
+				<!-- <label for="diachi">  <b style="font-size: 30px;"> Địa chỉ giao hàng :</b></label>
 				<div class="mt-4 col-lg-5 col-12">
           
              
                   <label for="tinhthanh">Tỉnh/Thành phố:</label>
                   <select id="tinhthanh" class="form-control tp" required>
                       <option value="">-- Chọn Tỉnh/TP --</option>
-                      <!-- Dữ liệu sẽ được load bằng JavaScript -->
+                       Dữ liệu sẽ được load bằng JavaScript 
                   </select>
                   <br>
               
@@ -67,7 +75,7 @@
                      placeholder="Số nhà, tên đường, phường/xã..." required>
           </div>
          
-      </div>
+      </div> -->
          	</div>
            <div class="card">
              <div id="cart-table"></div>
@@ -118,7 +126,46 @@
 
     </div> <!-- row.// -->
   </div> <!-- container -->
+  <!-- form địa chỉ -->
+  <div class="modal fade" id="diaChiModal" tabindex="-1" aria-labelledby="diaChiModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg"> <!-- modal-lg cho form lớn hơn -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="diaChiModalLabel">Thêm địa chỉ giao hàng</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <label for="tinhthanh">Tỉnh/Thành phố:</label>
+            <select id="tinhthanh" class="form-control" required>
+                <option value="">-- Chọn Tỉnh/TP --</option>
+            </select><br>
+  
+            <label for="quanhuyen">Quận/Huyện:</label>
+            <select id="quanhuyen" class="form-control" required disabled>
+                <option value="">-- Chọn Quận/Huyện --</option>
+            </select><br>
+  
+            <label for="phuongxa">Phường/Xã:</label>
+            <select id="phuongxa" class="form-control" required disabled>
+                <option value="">-- Chọn Phường/Xã --</option>
+            </select><br>
+  
+            <label for="diachi">Địa chỉ chi tiết:</label>
+            <input type="text" id="diachi" class="form-control" placeholder="Số nhà, tên đường..." required>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu địa chỉ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end form địa chỉ -->
+  
 </section> <!-- section-content.// -->
+
 
 <th:block th:replace="~{user/_footer}" />
 
@@ -126,4 +173,13 @@
 
 </body>
 
+
+<script>
+function toggleAddressForm() {
+    const form = document.getElementById("addressForm");
+    form.style.display = (form.style.display === "none") ? "block" : "none";
+  }
+</script>
+
 </html>
+

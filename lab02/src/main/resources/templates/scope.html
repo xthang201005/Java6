@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <h1> demo scope</h1>
+     <ul>
+        <li th:text="${a}"></li>
+        <li th:text="${b}"></li>
+        <li th:text="${session.c}"></li>
+        <li th:text="${application.d}"></li>
+        <li th:text="${param.e}"></li>
+     </ul>
+</body>
+</html> 
