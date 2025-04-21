@@ -13,7 +13,9 @@ import lombok.ToString;
 public class CartItemRequest {
 
 	
-	
+	private final String userId;
+	private final int productId;
+	private final int quantity;
 
 	@JsonCreator
 	public CartItemRequest(@JsonProperty("userId") String userId, @JsonProperty("productId") int productId,
