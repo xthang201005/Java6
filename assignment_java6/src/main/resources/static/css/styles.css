@@ -76,7 +76,7 @@ img.img-fluid {
 
 /* Hiệu ứng hover cho card trong lưới sản phẩm */
 .item-grid .card:hover {
-  box-shadow: 0 4px 15px rgb(153 153 153 / 30%); /* Đổ bóng nhẹ */
+  box-shadow: 0 4px 15px rgba(104, 102, 102, 0.3); /* Đổ bóng nhẹ */
   transition: 0.3s; /* Hiệu ứng chuyển đổi mượt mà */
 }
 
