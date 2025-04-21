@@ -12,9 +12,7 @@ import lombok.ToString;
 @ToString
 public class CartItemRequest {
 
-	private final String userId;
-	private final int productId;
-	private final int quantity;
+	
 	
 
 	@JsonCreator
