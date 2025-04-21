@@ -16,6 +16,5 @@ public class Student {
     String address;
     Double marks = 0.0;
     Contact contact;
-   
     List<String> subjects;
 }

@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Nguyen Van A1",
+    "marks": 9.5,
+    "age": 20,
+    "address": "Hanoi",
+    "contact": {
+      "email": "a@gmail.com",
+      "phone": "0123456789"
+    },
+    "subjects": ["Math", "English"]
+  },
+  {
+    "name": "Nguyen Van A2",
+    "marks": 9.5,
+    "age": 20,
+    "address": "Hanoi",
+    "contact": {
+      "email": "a@gmail.com",
+      "phone": "0123456789"
+    },
+    "subjects": ["Math", "English"]
+  },
+  {
+    "name": "Nguyen Van A3",
+    "marks": 9.5,
+    "age": 20,
+    "address": "Hanoi",
+    "contact": {
+      "email": "a@gmail.com",
+      "phone": "0123456789"
+    },
+    "subjects": ["Math", "English"]
+  },
+  {
+    "name": "Nguyen Van A4",
+    "marks": 9.5,
+    "age": 20,
+    "address": "Hanoi",
+    "contact": {
+      "email": "a@gmail.com",
+      "phone": "0123456789"
+    },
+    "subjects": ["Math", "English"]
+  }
+]
