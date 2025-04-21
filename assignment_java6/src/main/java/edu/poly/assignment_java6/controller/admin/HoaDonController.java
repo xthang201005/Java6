@@ -27,6 +27,8 @@ public class HoaDonController {
 	HoaDonService hoaDonService;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	SanPhamService sanPhamService;
 	
 
 	@GetMapping("/admin/hoadon")
