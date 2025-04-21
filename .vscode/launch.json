@@ -69,6 +69,27 @@
       "projectName": "assignment_java6",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Lab02Application<lab02>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "edu.poly.lab02.Lab02Application",
+      "projectName": "lab02",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=51406 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=lab02"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Lab03Application<lab03>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "edu.poly.lab03.Lab03Application",
+      "projectName": "lab03",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }

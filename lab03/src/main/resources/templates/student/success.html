@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{/layout/layout.html :: dynamic(~{::body})}"
+  >
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+    </head>
+    <body>
+      <h3>Result</h3>
+      <ul th:object="${sv}">
+        <li>Email: <i th:text="*{email}"></i></li>
+        <li>Full name: <i th:text="*{fullName}"></i></li>
+        <li>Mark: <i th:text="*{mark}"></i></li>
+        <li>Gender: <i th:text="*{gender} ? 'Nam' : 'Nữ'"></i></li>
+        <li>Country: <i th:text="*{country}"></i></li>
+      </ul>
+    </body>
+  </html>
+</html>
