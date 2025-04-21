@@ -7,6 +7,13 @@ import java.util.List;
 import edu.poly.lab01.model.Student;
   
 public class lambda {
+    static List<Student> list = List.of(
+        new Student("John", false, 8.0),
+        new Student("Marry", true, 9.0),
+        new Student("Tom", false, 7.0),
+        new Student("Jerry", false, 6.0),
+        new Student("Alice", true, 5.0)
+    );
   
     public static void main(String[] args) {
      //   demo1();
