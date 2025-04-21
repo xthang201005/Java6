@@ -27,8 +27,7 @@ public class HoaDonController {
 	HoaDonService hoaDonService;
 	@Autowired
 	private HttpSession session;
-	@Autowired
-	SanPhamService sanPhamService;
+	
 
 	@GetMapping("/admin/hoadon")
 	public String hoadonManager(Model model, @RequestParam(defaultValue = "0", name = "page") int page) {
