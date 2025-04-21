@@ -578,7 +578,7 @@ async function loadPhuongXa() {
 
 
 
-// Gắn sự kiện
+// 
 document.getElementById('tinhthanh').addEventListener('change', loadQuanHuyen);
 
 document.getElementById('quanhuyen').addEventListener('change', loadPhuongXa);
