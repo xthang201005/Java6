@@ -8,7 +8,7 @@
           </a>
         </div>
         <!-- col.// -->
-        <div class="col-lg-4 col-xl-5">
+        <div class="col-lg-4 col-xl-5 position-relative">
           <form
             th:action="@{/search}"
             method="get"
@@ -21,6 +21,7 @@
                 class="form-control"
                 placeholder="Nhập từ khóa cần tìm ..."
                 name="q"
+                id="search-box"
                 th:value="${query}"
               />
               <button class="btn btn-primary" type="submit">
@@ -28,7 +29,11 @@
               </button>
             </div>
           </form>
+        
+          <!-- Hiển thị gợi ý sản phẩm -->
+          <div id="suggestions" class="list-group position-absolute w-100" style="z-index: 1000;"></div>
         </div>
+        
         <!-- col.// -->
         <div class="col-lg-5 col-xl-4">
           <div th:if="${session.currentUser != null}">
@@ -162,3 +167,32 @@
   <!-- container.// -->
 </nav>
 <!-- navbar-main.// -->
+ 
+<script>
+  document.getElementById("search-box").addEventListener("keyup", function () {
+    const keyword = this.value;
+    const suggestions = document.getElementById("suggestions");
+
+    if (keyword.length === 0) {
+      suggestions.innerHTML = "";
+      return;
+    }
+
+    fetch(`/search-suggestions?keyword=${encodeURIComponent(keyword)}`)
+      .then(res => res.json())
+      .then(data => {
+        let html = "";
+        data.forEach(item => {
+          html += `<a href="/product/${item.id}" class="list-group-item list-group-item-action">${item.name}</a>`;
+        });
+        suggestions.innerHTML = html;
+      });
+  });
+
+  // Ẩn gợi ý khi click ra ngoài
+  document.addEventListener("click", function (e) {
+    if (!document.getElementById("search-box").contains(e.target)) {
+      document.getElementById("suggestions").innerHTML = "";
+    }
+  });
+</script>
