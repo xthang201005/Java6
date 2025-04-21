@@ -41,6 +41,7 @@ public class SearchController {
 		} else {
 			return "redirect:/";
 		}
+		//
 	}
 
 }
