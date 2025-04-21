@@ -26,4 +26,149 @@ public class ScopeController {
         servletContext.setAttribute("d", " i am in servletContext");
         return "scope";
     }
+    model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+model.addAttribute("sanphams", sanPhamPage.getContent()); // Danh sách user
+				model.addAttribute("totalProducts", sanPhamPage.getTotalElements()); // Danh sách user
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("totalPages", sanPhamPage.getTotalPages());
+				model.addAttribute("currentPage", page); // Trang hiện tại
+				model.addAttribute("order", order);
+				model.addAttribute("priceRanges", priceRanges);
+				model.addAttribute("loais", loaiService.getAllLoai(0, 5));
+				model.addAttribute("loai", loai);
+
 }
