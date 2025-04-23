@@ -412,48 +412,56 @@ const state = {
 
 // RENDER
 function render() {
-  // Tạo fragment để giảm thao tác DOM
-  const cartItemRowComponentsFragment = document.createDocumentFragment();
+  // render thông tin giỏ hàng
+  // Render cartTableRootElement
+  const cartItemRowComponentsFragment = state.cart.cartItems
+    .map(cartItemRowComponent)
+    .join(""); // tạo component cho sản phẩm trong giỏ hàng
+  cartTableRootElement.innerHTML = cartTableComponent(
+    cartItemRowComponentsFragment
+  ); // hiển thị thông tin giỏ hàng
 
-  state.cart.cartItems.forEach((cartItem) => {
-    const rowElement = document.createElement("tr");
-    rowElement.innerHTML = cartItemRowComponent(cartItem);
-    cartItemRowComponentsFragment.appendChild(rowElement);
+  // Render tempPriceRootElement, deliveryPriceRootElement, totalPriceRootElement
+  tempPriceRootElement.innerHTML = _formatPrice(state.getTempPrice()); // hiển thị giá tạm tính
+  deliveryPriceRootElement.innerHTML = _formatPrice(state.getDeliveryPrice()); // hiển thị giá giao hàng
+  totalPriceRootElement.innerHTML = _formatPrice(state.getTotalPrice()); // hiển thị tổng giá
 
-    // Gắn sự kiện cho nút xóa và cập nhật
-    const deleteCartItemBtnElement = rowElement.querySelector(
-      `#delete-cart-item-${cartItem.id}`
-    );
-    const updateCartItemBtnElement = rowElement.querySelector(
-      `#update-cart-item-${cartItem.id}`
-    );
-    const quantityCartItemInputElement = rowElement.querySelector(
-      `#quantity-cart-item-${cartItem.id}`
-    );
-
-    deleteCartItemBtnElement.addEventListener("click", () =>
-      state.deleteCartItem(cartItem)
-    );
-    updateCartItemBtnElement.addEventListener("click", () =>
-      state.updateCartItem(cartItem, Number(quantityCartItemInputElement.value))
-    );
+  // Render checkoutBtnElement, deliveryMethodRadioElements
+  const isCartItemsEmpty = state.cart.cartItems.length === 0; // kiểm tra giỏ hàng có sản phẩm không
+  checkoutBtnElement.disabled = isCartItemsEmpty; // kiểm tra nút thanh toán có bị vô hiệu hóa không
+  deliveryMethodRadioElements.forEach((radio) => {
+    // kiểm tra phương thức giao hàng
+    radio.disabled = isCartItemsEmpty; // kiểm tra phương thức giao hàng có bị vô hiệu hóa không
+    radio.checked = radio.value === String(state.order.deliveryMethod); // kiểm tra phương thức giao hàng có được chọn không
   });
 
-  // Cập nhật bảng giỏ hàng
-  cartTableRootElement.innerHTML = ""; // Xóa nội dung cũ
-  cartTableRootElement.appendChild(cartItemRowComponentsFragment);
+  // Attach event handlers for delete cart item buttons
+  state.cart.cartItems.forEach((cartItem) => {
+    // thêm sự kiện cho nút xóa sản phẩm khỏi giỏ hàng
+    const deleteCartItemBtnElement = document.querySelector(
+      `#delete-cart-item-${cartItem.id}`
+    ); // lấy thông tin nút xóa sản phẩm khỏi giỏ hàng
+    deleteCartItemBtnElement.addEventListener("click", () =>
+      state.deleteCartItem(cartItem)
+    ); //  thêm sự kiện click vào nút xóa sản phẩm khỏi giỏ hàng
+  });
 
-  // Cập nhật giá
-  tempPriceRootElement.textContent = _formatPrice(state.getTempPrice());
-  deliveryPriceRootElement.textContent = _formatPrice(state.getDeliveryPrice());
-  totalPriceRootElement.textContent = _formatPrice(state.getTotalPrice());
-
-  // Cập nhật trạng thái nút và radio
-  const isCartItemsEmpty = state.cart.cartItems.length === 0;
-  checkoutBtnElement.disabled = isCartItemsEmpty;
-  deliveryMethodRadioElements.forEach((radio) => {
-    radio.disabled = isCartItemsEmpty;
-    radio.checked = radio.value === String(state.order.deliveryMethod);
+  // Attach event handlers for update cart item buttons
+  state.cart.cartItems.forEach((cartItem) => {
+    // thêm sự kiện cho nút cập nhật số lượng sản phẩm trong giỏ hàng
+    const updateCartItemBtnElement = document.querySelector(
+      `#update-cart-item-${cartItem.id}`
+    ); // lấy thông tin nút cập nhật số lượng sản phẩm trong giỏ hàng
+    updateCartItemBtnElement.addEventListener("click", () => {
+      // thêm sự kiện click vào nút cập nhật số lượng sản phẩm trong giỏ hàng
+      const quantityCartItemInputElement = document.querySelector(
+        `#quantity-cart-item-${cartItem.id}`
+      ); // lấy thông tin số lượng sản phẩm
+      void state.updateCartItem(
+        cartItem,
+        Number(quantityCartItemInputElement.value)
+      ); // cập nhật số lượng sản phẩm
+    });
   });
 }
 
