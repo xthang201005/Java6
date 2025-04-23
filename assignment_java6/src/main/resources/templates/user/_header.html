@@ -169,5 +169,23 @@
 <!-- navbar-main.// -->
  
 <script>
-  
+  document.getElementById("search-box").addEventListener("keyup", function () {
+    const keyword = this.value;
+    const suggestions = document.getElementById("suggestions");
+
+    if (keyword.length === 0) {
+      suggestions.innerHTML = "";
+      return;
+    }
+
+    fetch(`/search-suggestions?keyword=${encodeURIComponent(keyword)}`)
+      .then(res => res.json())
+      .then(data => {
+        let html = "";
+        data.forEach(item => {
+          html += `<a href="/product/${item.id}" class="list-group-item list-group-item-action">${item.name}</a>`;
+        });
+        suggestions.innerHTML = html;
+      });
+  });
 </script>
