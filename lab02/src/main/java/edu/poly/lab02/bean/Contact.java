@@ -1,8 +1,4 @@
 package edu.poly.lab02.bean;
-
-
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

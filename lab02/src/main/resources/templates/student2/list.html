@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Info</title>
+  </head>
+  <body>
+    <h3>Thymeleaf Flow Control</h3>
+    <ul>
+      <li th:each="sv, state : ${dssv}">
+        <a th:href="@{|/student2/list?index=${state.index}|}">[[${sv.name}]]</a>
+      </li>
+      <li>
+        number off student
+        <i th:text="${#lists.size(dssv)}"></i>
+      </li>
+    </ul>
+
+    <h3>Student Details</h3>
+
+    <ul th:if="${sv != null}" th:object="${sv}">
+      <li><i>Name: </i> <b th:text="*{name}"></b></li>
+      <li><i>Marks: </i> <b th:text="*{marks}"></b></li>
+      <li><i>Age: </i> <b th:text="*{age}"></b></li>
+      <li><i>Address: </i> <b th:text="*{address}"></b></li>
+
+      <li>
+        Contact:
+        <ul>
+          <li><i>Email: </i> <b th:text="*{contact.email}"></b></li>
+          <li><i>Phone: </i> <b th:text="*{contact.phone}"></b></li>
+        </ul>
+      </li>
+
+      <li>
+        Subjects:
+        <ul>
+          <li th:each="subject : *{subjects}">
+            <b th:text="${subject}"></b>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <div th:switch="*{#lists.size(subjects)}">
+          <b th:case="1">Mới vào trường</b>
+          <b th:case="2">Đang đi học</b>
+          <b th:case="*">Sắp ra trường</b>
+        </div>
+      </li>
+
+      <li th:if="*{marks > 9}"><i>Title:</i> <b>Học sinh xuất sắc</b></li>
+    </ul>
+  </body>
+</html>
