@@ -1,8 +1,6 @@
 package edu.poly.assignment_java6.controller.user;
-
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.poly.assignment_java6.model.SanPham;
 import edu.poly.assignment_java6.service.LoaiService;
