@@ -82,18 +82,18 @@ img.img-fluid {
 
 /* Hiệu ứng khi card bị nhấn */
 .item-grid .card:active {
-  box-shadow: inset 0 4px 15px rgb(153 153 153 / 30%);
+  box-shadow: inset 0 4px 15px rgba(127, 127, 127, 0.3);
 }
 
 /* Định dạng phần danh mục sản phẩm */
 .section-pagetop {
-  padding: 40px 0; /* Thêm khoảng đệm trên và dưới */
+  padding: 39px 0; /* Thêm khoảng đệm trên và dưới */
 }
 
 /* Thiết lập khoảng đệm dọc */
 .padding-y {
-  padding-top: 40px;
-  padding-bottom: 40px;
+  padding-top: 39px;
+  padding-bottom: 39px;
 }
 
 /* Thiết lập đường viền dưới cho các nhóm bộ lọc */
